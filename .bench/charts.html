@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>waterfall-bench charts</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #fff; }
+  #chart { width: 820px; height: 440px; }
+</style>
+</head>
+<body>
+<div id="chart"></div>
+<script>
+  var which = new URLSearchParams(location.search).get('chart') || '1'
+  var el = document.getElementById('chart')
+  var chart = echarts.init(el, null, { devicePixelRatio: 2 })
+
+  var common = {
+    backgroundColor: '#ffffff',
+    textStyle: { fontFamily: 'Microsoft YaHei, PingFang SC, sans-serif' },
+    grid: { left: 70, right: 96, top: 86, bottom: 56 },
+    legend: { top: 44, itemWidth: 18, textStyle: { fontSize: 13, color: '#475569' } },
+  }
+
+  if (which === '1') {
+    // 图 1：不同数据量下两种分配策略的耗时（2 列，200 次循环取中位数）
+    chart.setOption(Object.assign({}, common, {
+      title: {
+        text: '分配算法耗时对比：最矮列优先 vs 取模轮流',
+        subtext: '2 列 · 单次全量分配 · Node 22 · 15 轮取中位数',
+        left: 'center',
+        textStyle: { fontSize: 17, color: '#1e293b' },
+        subtextStyle: { fontSize: 12, color: '#94a3b8' },
+      },
+      tooltip: { trigger: 'axis' },
+      xAxis: {
+        type: 'category',
+        name: '数据量(条)',
+        nameTextStyle: { color: '#64748b' },
+        data: ['50', '200', '500', '1000', '2000', '5000'],
+        axisLine: { lineStyle: { color: '#cbd5e1' } },
+        axisLabel: { color: '#475569' },
+      },
+      yAxis: {
+        type: 'value',
+        name: '耗时 (ms)',
+        nameTextStyle: { color: '#64748b' },
+        axisLabel: { color: '#475569', formatter: function (v) { return v.toFixed(3) } },
+        splitLine: { lineStyle: { color: '#eef2f7' } },
+      },
+      series: [
+        {
+          name: '最矮列优先（组件采用）',
+          type: 'line',
+          smooth: true,
+          symbolSize: 8,
+          data: [0.0010, 0.0011, 0.0024, 0.0043, 0.0095, 0.0217],
+          lineStyle: { width: 3, color: '#3b82f6' },
+          itemStyle: { color: '#3b82f6' },
+          label: { show: true, fontSize: 11, color: '#3b82f6', formatter: function (p) { return p.value.toFixed(3) } },
+        },
+        {
+          name: '取模轮流',
+          type: 'line',
+          smooth: true,
+          symbolSize: 8,
+          data: [0.0005, 0.0009, 0.0017, 0.0028, 0.0052, 0.0124],
+          lineStyle: { width: 3, color: '#f59e0b', type: 'dashed' },
+          itemStyle: { color: '#f59e0b' },
+        },
+      ],
+    }))
+  } else {
+    // 图 2：随机宽高比场景的列高差（2 列，100 轮平均）
+    chart.setOption(Object.assign({}, common, {
+      title: {
+        text: '随机宽高比下的列高失衡：差距随数据量拉大',
+        subtext: '宽高比 0.6~1.5 随机 · 2 列 · 100 轮取平均列高差',
+        left: 'center',
+        textStyle: { fontSize: 17, color: '#1e293b' },
+        subtextStyle: { fontSize: 12, color: '#94a3b8' },
+      },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      xAxis: {
+        type: 'category',
+        name: '数据量(条)',
+        nameTextStyle: { color: '#64748b' },
+        data: ['50', '200', '1000'],
+        axisLine: { lineStyle: { color: '#cbd5e1' } },
+        axisLabel: { color: '#475569' },
+      },
+      yAxis: {
+        type: 'value',
+        name: '平均列高差 (rpx)',
+        nameTextStyle: { color: '#64748b' },
+        axisLabel: { color: '#475569' },
+        splitLine: { lineStyle: { color: '#eef2f7' } },
+      },
+      series: [
+        {
+          name: '最矮列优先（组件采用）',
+          type: 'bar',
+          barWidth: 46,
+          data: [232, 207, 219],
+          itemStyle: { color: '#3b82f6', borderRadius: [6, 6, 0, 0] },
+          label: { show: true, position: 'top', color: '#3b82f6', fontSize: 12 },
+        },
+        {
+          name: '取模轮流',
+          type: 'bar',
+          barWidth: 46,
+          data: [549, 1034, 2253],
+          itemStyle: { color: '#f59e0b', borderRadius: [6, 6, 0, 0] },
+          label: { show: true, position: 'top', color: '#d97706', fontSize: 12 },
+        },
+      ],
+    }))
+  }
+  // 标记渲染完成，供截图前等待
+  chart.on('finished', function () { document.title = 'chart-ready' })
+</script>
+</body>
+</html>

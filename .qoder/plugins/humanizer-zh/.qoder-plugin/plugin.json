@@ -1,0 +1,15 @@
+{
+  "name": "humanizer-zh",
+  "displayName": "去AI味写作 (Humanizer-zh)",
+  "version": "0.1.0",
+  "description": "Remove signs of AI-generated writing from Chinese text based on Wikipedia's Signs of AI writing guide (24 patterns).",
+  "descriptionZh": "去除中文文本中的 AI 生成痕迹，基于维基百科 AI 写作特征指南的 24 种模式检测与改写。",
+  "author": { "name": "op7418 (译), blader (原作)" },
+  "homepage": "https://github.com/op7418/humanizer-zh",
+  "repository": "https://github.com/op7418/humanizer-zh",
+  "logo": "./assets/avatar.svg",
+  "keywords": ["qoder-plugin", "skill", "writing", "humanizer", "去AI味"],
+  "category": "developer-tools",
+  "tags": ["skill"],
+  "skills": "./skills/"
+}
