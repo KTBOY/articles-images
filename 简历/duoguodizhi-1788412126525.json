@@ -1,0 +1,57 @@
+[
+  {
+    "id": "eb9e8f2b-f947-47e2-8a0a-b1573b345d67",
+    "basic": {
+      "firstName": "麻美",
+      "lastName": "藤野",
+      "gender": "Female",
+      "title": "Ms.",
+      "birthday": "12/7/2002",
+      "age": 23,
+      "hairColor": "Auburn",
+      "bloodType": "B",
+      "height": "159 cm",
+      "weight": "62 kg",
+      "education": "Doctorate"
+    },
+    "address": {
+      "street": "4丁目2番2号",
+      "city": "Agatsuma-gun",
+      "county": "Agatsuma-gun",
+      "state": "10",
+      "stateFull": "Gunma",
+      "zipCode": "139-5460",
+      "country": "Japan"
+    },
+    "contact": {
+      "phone": "+81 82 3678 3463"
+    },
+    "employment": {
+      "occupation": "National Optimization Technician",
+      "company": "杉山家具有限会社",
+      "companySize": "500+",
+      "status": "Part-time",
+      "salary": "1,144,831 JPY/month"
+    },
+    "financial": {
+      "cardType": "Mastercard",
+      "creditCardNumber": "3589858271931549",
+      "cvv": "593",
+      "expiry": "10/28"
+    },
+    "ssn": "950903389",
+    "nationalId": "385862474457",
+    "internet": {
+      "username": "vcrp72.qg4ssu90",
+      "password": "mabefihiva",
+      "email": "vcrp72.qg4ssu39@memorable-co-producer.biz",
+      "tempEmail": "l7nn5j.i9dkep83@mailinator.com",
+      "website": "https://memorable-co-producer.biz",
+      "userAgent": "Googlebot/2.1 (+http://www.google.com/bot.html)",
+      "os": "Android 15",
+      "uuid": "af80446d-f1cf-4ad7-8d16-a2a9dc8cfbaf",
+      "securityQuestion": "What city were you born in?",
+      "securityAnswer": "gown"
+    }
+  }
+]
